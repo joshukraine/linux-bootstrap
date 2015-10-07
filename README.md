@@ -1,4 +1,6 @@
-# My Dotfiles
+# My Dotfiles for Linux Desktop
+
+**UNDER CONSTRUCTION**
 
 These are the dotfiles and general preferences I use on my primary machine running OS X. The `setupmac` script is very specific to the Mac platform. It has been successfully tested on the following versions of OS X:
 
