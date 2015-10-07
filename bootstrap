@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
 ################################################################################
-# setupmac
+# bootstrap
 #
-# This script is intended to set up a new Mac computer with my dotfiles and
-# other development preferences.
+# This script is intended to set up a new Linux desktop machine with my dotfiles
+# and other development preferences.
+#
+# Much of this script was derived from thoughtbot's now unsupported Linux
+# version of Laptop.
+# https://github.com/thoughtbot/laptop/tree/39768b19959f74724ed0c0ea92e5b2f6f78e45c1
 ################################################################################
 
 
@@ -19,55 +23,6 @@ fancy_echo() {
   printf "\n$fmt\n" "$@"
 }
 
-brew_install_or_upgrade() {
-  if brew_is_installed "$1"; then
-    if brew_is_upgradable "$1"; then
-      fancy_echo "Upgrading %s ..." "$1"
-      brew upgrade "$@"
-    else
-      fancy_echo "Already using the latest version of %s. Skipping ..." "$1"
-    fi
-  else
-    fancy_echo "Installing %s ..." "$1"
-    brew install "$@"
-  fi
-}
-
-brew_is_installed() {
-  local name="$(brew_expand_alias "$1")"
-
-  brew list -1 | grep -Fqx "$name"
-}
-
-brew_is_upgradable() {
-  local name="$(brew_expand_alias "$1")"
-
-  ! brew outdated --quiet "$name" >/dev/null
-}
-
-brew_tap() {
-  brew tap "$1" 2> /dev/null
-}
-
-brew_expand_alias() {
-  brew info "$1" 2>/dev/null | head -1 | awk '{gsub(/:/, ""); print $1}'
-}
-
-brew_launchctl_restart() {
-  local name="$(brew_expand_alias "$1")"
-  local domain="homebrew.mxcl.$name"
-  local plist="$domain.plist"
-
-  fancy_echo "Restarting %s ..." "$1"
-  mkdir -p "$HOME/Library/LaunchAgents"
-  ln -sfv "/usr/local/opt/$name/$plist" "$HOME/Library/LaunchAgents"
-
-  if launchctl list | grep -Fq "$domain"; then
-    launchctl unload "$HOME/Library/LaunchAgents/$plist" >/dev/null
-  fi
-  launchctl load "$HOME/Library/LaunchAgents/$plist" >/dev/null
-}
-
 
 ################################################################################
 # Next, a little more setup...
@@ -78,7 +33,6 @@ set -u # Prevent unset variables
 
 osname=$(uname)
 divider="====> "
-COMMANDLINE_TOOLS="/Library/Developer/CommandLineTools"
 DOTFILES_DIR=$HOME/dotfiles
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
@@ -86,21 +40,20 @@ OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 DOTFILES_REPO_URL="https://github.com/joshukraine/dotfiles.git"
 
 # Change this value for testing installs of feature branches.
-DOTFILES_BRANCH="master"
+DOTFILES_BRANCH="linux-desktop"
 
 
 ################################################################################
-# Make sure we're on a Mac before continuing
+# Make sure we're on Linux before continuing
 ################################################################################
 
-if [ "$osname" == 'Linux' ]; then
-  fancy_echo "Oops, looks like you're on a Linux machine. Please run the command
-below to download and execute the Linux setup script."
-  fancy_echo "curl --remote-name ..."
+if [[ "$osname" == 'Darwin' ]]; then
+  fancy_echo "Oops, looks like you're on a Mac. Please check out the link
+below for instructions on setting up dotfiles on OS X."
+  fancy_echo "https://github.com/joshukraine/dotfiles/blob/master/README.md"
   exit 1
-elif [ "$osname" != 'Darwin' ]; then
-  fancy_echo "Oops, it looks like you're using a non-UNIX system. This script
-only supports Mac and Linux. Exiting..."
+elif [[ "$osname" != 'Linux' ]]; then
+  fancy_echo "Oops, it looks like you're using a non-supported OS. Exiting..."
   exit 1
 fi
 
