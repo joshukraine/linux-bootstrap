@@ -157,11 +157,26 @@ fi
 fancy_echo "Installing Terminator!!! :D ..."
 sudo aptitude install -y terminator
 
+
 ################################################################################
-# 3. Setup dotfiles
+# 3. Install oh-my-zsh
 ################################################################################
 
-fancy_echo "$divider Step 3: Installing dotfiles..."
+fancy_echo "$divider Step 3: Installing oh-my-zsh..."
+if [ -d "$HOME/.oh-my-zsh" ]; then
+  rm -rf $HOME/.oh-my-zsh
+fi
+git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+
+fancy_echo "Changing your shell to zsh ..."
+chsh -s $(which zsh)
+
+
+################################################################################
+# 4. Setup dotfiles
+################################################################################
+
+fancy_echo "$divider Step 4: Installing dotfiles..."
 if [[ -d $DOTFILES_DIR ]]; then
   fancy_echo "Backing up old dotfiles to $HOME/old_dotfiles_backup..."
   rm -rf $OLD_DOTFILES_BACKUP
@@ -199,10 +214,10 @@ fancy_echo "Dotfiles setup complete!"
 
 
 ################################################################################
-# 4. Install Powerline-patched fonts
+# 5. Install Powerline-patched fonts
 ################################################################################
 
-fancy_echo "$divider Step 4: Installing fixed-width fonts patched for use with Powerline symbols..."
+fancy_echo "$divider Step 5: Installing fixed-width fonts patched for use with Powerline symbols..."
 if [ -d "$HOME/src/fonts" ]; then
   rm -rf $HOME/src/fonts
 fi
@@ -216,10 +231,10 @@ fancy_echo "Done!"
 
 
 ################################################################################
-# 5. Install Vundle and vim plugins
+# 6. Install Vundle and vim plugins
 ################################################################################
 
-fancy_echo "$divider Step 5: Installing Vundle and vim plugins..."
+fancy_echo "$divider Step 6: Installing Vundle and vim plugins..."
 if [ -d $HOME/.vim/bundle ]; then
   rm -rf $HOME/.vim/bundle
 fi
@@ -232,11 +247,10 @@ fancy_echo "Done!"
 
 
 ################################################################################
-# 6. Install rbenv and ruby-build
+# 7. Install rbenv and ruby-build
 ################################################################################
 
-fancy_echo "$divider Step 6: Installing rbenv and ruby-build..."
-
+fancy_echo "$divider Step 7: Installing rbenv and ruby-build..."
 if [[ ! -d "$HOME/.rbenv" ]]; then
   fancy_echo "Installing rbenv..."
   git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
@@ -257,7 +271,6 @@ fi
 
 fancy_echo "$divider Step 8: Installing Ruby, Rails, and friends..."
 
-
 fancy_echo "Installing Ruby $ruby_version ..."
 rbenv install -s "$ruby_version"
 
@@ -272,6 +285,7 @@ gem install bundler --no-document --pre
 
 fancy_echo "Installing Rails..."
 gem install rails
+
 
 ################################################################################
 # 9. Install Google Chrome
