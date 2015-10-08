@@ -1,12 +1,9 @@
 # Exports {{{
-export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin
+export PATH=$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
 export EDITOR="vim"
 export BUNDLER_EDITOR="vim"
 export MANPAGER="less -X" # Don’t clear the screen after quitting a manual page
 export TERM="screen-256color"
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
 # }}}
 
 
@@ -14,9 +11,6 @@ export PATH=$PATH:$GOPATH/bin
 export ZSH=$HOME/.oh-my-zsh
 export UPDATE_ZSH_DAYS=7
 COMPLETION_WAITING_DOTS="true"
-
-plugins=(git pow vagrant)
-
 source $ZSH/oh-my-zsh.sh
 # }}}
 
@@ -57,6 +51,10 @@ alias la='ls -lAhF'
 alias lf='ls -F'
 alias lh='ls -d .*'
 
+# Copy/paste
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
 # Tree
 alias t2='tree -FL 2'
 alias t3='tree -FL 3'
@@ -69,10 +67,6 @@ alias t4a='tree -FLa 4'
 # Upgrade Oh My Zshell
 alias upz='upgrade_oh_my_zsh'
 
-# Show/Hide hidden files in Finder
-alias saf='defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder'
-alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder'
-
 # Rails
 alias rc='rails console'
 alias rg='rails generate'
@@ -83,29 +77,13 @@ alias rtp='rake test:prepare'
 alias bx='bundle exec'
 
 # Postgres
-alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-alias stoppost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop'
-alias statpost='ps aux | ag postgres'
-
-# Homebrew
-alias bu='brew update'
-alias bg='brew upgrade --all'
-alias bo='brew outdated'
-alias bd='brew doctor'
-alias bc='brew cleanup'
+alias startpost='sudo /etc/init.d/postgresql start'
+alias stoppost='sudo /etc/init.d/postgresql stop'
+alias statpost='ps aux | grep postgres'
 
 # rbenv
 alias rbv='rbenv versions'
 alias rbl='rbenv install -l | ag "^\s+[0-9].*" --nocolor'
-
-# Finder
-alias o='open . &'
-
-# Check for OS X updates
-alias upc='softwareupdate -l'
-
-# Download and install OS X updates
-alias upd='softwareupdate -i -a'
 # }}}
 
 
@@ -197,17 +175,6 @@ alias tsrc="tmux source-file ~/.tmux.conf"
 
 # Kill all tmux sessions
 alias tka="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}" # tmux kill all sessions
-
-# Always in tmux :)
-_not_inside_tmux() { [[ -z "$TMUX" ]] }
-
-ensure_tmux_is_running() {
-  if _not_inside_tmux; then
-    tat
-  fi
-}
-
-ensure_tmux_is_running
 # }}}
 
 
@@ -218,15 +185,9 @@ HISTFILE=~/.zsh_history
 # }}}
 
 
-# cdpath {{{
-setopt auto_cd
-cdpath=($HOME/code $HOME/Developer $HOME/Sites $HOME/vms $HOME/Dropbox $HOME)
-# }}}
-
-
 # functions {{{
 randpw() {
-  openssl rand -base64 4 | md5 | head -c8 ; echo
+  < /dev/urandom tr -dc _a-z-0-9 | head -c${1:-8};echo;
 }
 
 # Determine size of a file or total size of a directory
@@ -243,6 +204,7 @@ function fs() {
 		du $arg .[^.]* *;
 	fi;
 }
+
 # }}}
 
 
