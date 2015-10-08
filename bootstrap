@@ -199,6 +199,12 @@ for file in $files; do
   ln -nfs "$DOTFILES_DIR/$file" "$HOME/.$file"
 done
 
+fancy_echo "-> Linking $DOTFILES_DIR/bin/tat to $HOME/bin/tat..."
+if [ ! -d "$HOME/bin/" ]; then
+  mkdir "$HOME/bin"
+fi
+ln -nfs "$DOTFILES_DIR/bin/tat" "$HOME/bin/tat"
+
 fancy_echo "Configuring Terminator..."
 if [[ -f "$HOME/.config/terminator/config" ]]; then
   fancy_echo "Backing up existing Terminator profile..."
