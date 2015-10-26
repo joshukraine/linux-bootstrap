@@ -2,9 +2,9 @@
 
 These are my dotfiles and general system preferences adapted for Debian-type Linux systems. This setup is intended for a personal development machine, not a web-facing server.
 
-&#9657; **Want basic dotfiles for a headless Linux server? Check out the [linux-server branch](https://github.com/joshukraine/dotfiles/tree/linux-server)**
+&#9657; **Want basic dotfiles for a headless Linux server? Check out [My Dotfiles for Linux Server](https://github.com/joshukraine/linux-server)**
 
-&#9657; **Running OS X? Check out the [master branch](https://github.com/joshukraine/dotfiles).**
+&#9657; **Running OS X? Check out [My Dotfiles for OS X](https://github.com/joshukraine/dotfiles).**
 
 ### Supported distros
 
