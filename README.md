@@ -17,13 +17,13 @@ This script has been successfully tested on the following Linux distros:
 To install with a one-liner, run this:
 
 ```sh
-bash <(wget -qO- https://raw.githubusercontent.com/joshukraine/dotfiles/linux-bootstrap/bootstrap) 2>&1 | tee ~/bootstrap.log
+bash <(wget -qO- https://raw.githubusercontent.com/joshukraine/linux-bootstrap/master/bootstrap) 2>&1 | tee ~/bootstrap.log
 ```
 
 Want to read through the script first?
 
 ```sh
-wget -qO- https://raw.githubusercontent.com/joshukraine/dotfiles/linux-bootstrap/bootstrap > bootstrap
+wget -qO- https://raw.githubusercontent.com/joshukraine/linux-bootstrap/master/bootstrap > bootstrap
 less bootstrap
 bash bootstrap 2>&1 | tee ~/bootstrap.log
 ```
