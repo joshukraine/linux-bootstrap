@@ -1,10 +1,8 @@
-# My Dotfiles for Linux Desktop
+# Linux Bootstrap
 
-These are my dotfiles and general system preferences adapted for Debian-type Linux systems. This setup is intended for a personal development machine, not a web-facing server.
+The purpose of this script is to provision a new machine running a fresh install of Ubuntu or other Debian-type Linux system. It includes the software, dotfiles, and general preference I use for web development. The command line environment is based on zsh, vim and tmux. This setup is intended for a personal development machine, not a web-facing server.
 
-&#9657; **Want basic dotfiles for a headless Linux server? Check out [My Dotfiles for Linux Server](https://github.com/joshukraine/linux-server)**
-
-&#9657; **Running OS X? Check out [My Dotfiles for OS X](https://github.com/joshukraine/dotfiles).**
+&#9657; **Running OS X? Check out [Mac Bootstrap](https://github.com/joshukraine/mac-bootstrap).**
 
 ### Supported distros
 
@@ -36,9 +34,7 @@ When you invoke `bootstrap`, this is what it does in a nutshell:
 
 * Patch the system and install various software packages
 * Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-* Set up some basic directories in `$HOME`
 * Symlink dotfiles to `$HOME`
-* Copy in solarized profile for [Terminator](https://launchpad.net/terminator)
 * Install several fixed-width fonts.
 * Install Vundle and plugins for vim.
 * Install [rbenv](https://github.com/sstephenson/rbenv) and [ruby-build](https://github.com/sstephenson/ruby-build#readme)
