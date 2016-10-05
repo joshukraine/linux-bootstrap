@@ -196,6 +196,7 @@ source $DOTFILES_DIR/install.sh
 # 5. Install ~/bin utilities
 ################################################################################
 
+bootstrap_echo "Step 5: Installing bin utilities..."
 mkdir $HOME/bin
 cp -R $BOOTSTRAP_DIR/bin/* $HOME/bin/
 
