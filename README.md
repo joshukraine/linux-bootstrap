@@ -1,10 +1,12 @@
-# Linux Bootstrap
+Linux Bootstrap
+===============
 
 The purpose of this script is to provision a new machine running a fresh install of Ubuntu or other Debian-type Linux system. It includes the software, dotfiles, and general preference I use for web development. The command line environment is based on zsh, vim and tmux. This setup is intended for a personal development machine, not a web-facing server.
 
-&#9657; **Running OS X? Check out [Mac Bootstrap](https://github.com/joshukraine/mac-bootstrap).**
+&#9657; **Running macOS? Check out [Mac Bootstrap](http://jsua.co/macos).**
 
-### Supported distros
+Supported distros
+-----------------
 
 This script has been successfully tested on the following Linux distros:
 
@@ -12,7 +14,8 @@ This script has been successfully tested on the following Linux distros:
 * Lubuntu 14.10, 15.04
 * Debian 7.8, 8.2
 
-### Installation
+Installation
+------------
 
 To install with a one-liner, run this:
 
@@ -28,7 +31,8 @@ less bootstrap
 bash bootstrap 2>&1 | tee ~/bootstrap.log
 ```
 
-### What does it do?
+What does it do?
+----------------
 
 When you invoke `bootstrap`, this is what it does in a nutshell:
 
@@ -42,7 +46,8 @@ When you invoke `bootstrap`, this is what it does in a nutshell:
 * Install Google Chrome (for compatible distros)
 
 
-### Some of my favorite dotfile repos
+Some of my favorite dotfile repos
+---------------------------------
 
 * Pro Vim (https://github.com/Integralist/ProVim)
 * Trevor Brown (https://github.com/Stratus3D/dotfiles)
@@ -60,7 +65,8 @@ When you invoke `bootstrap`, this is what it does in a nutshell:
 * Paul Irish (https://github.com/paulirish/dotfiles)
 
 
-### Helpful web resources on dotfiles, et al.
+Helpful web resources on dotfiles, et al.
+-----------------------------------------
 
 * http://dotfiles.github.io/
 * https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789
