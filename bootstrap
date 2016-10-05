@@ -16,11 +16,11 @@
 # First, some helpful functions borrowed from Laptop. Thank you, thoughtbot. :)
 ################################################################################
 
-fancy_echo() {
+bootstrap_echo() {
   local fmt="$1"; shift
 
   # shellcheck disable=SC2059
-  printf "\n$fmt\n" "$@"
+  printf "\n[BOOTSTRAP] $fmt\n" "$@"
 }
 
 
@@ -53,12 +53,12 @@ BOOTSTRAP_DIR=$HOME/linux-bootstrap
 ################################################################################
 
 if [[ "$osname" == 'Darwin' ]]; then
-  fancy_echo "Oops, looks like you're on a Mac. Please check out the link
-below for instructions on setting up dotfiles on OS X."
-  fancy_echo "https://github.com/joshukraine/dotfiles/blob/master/README.md"
+  bootstrap_echo "Oops, looks like you're on a Mac. Please check out the link
+below for instructions on setting up macOS."
+  bootstrap_echo "http://jsua.co/macos"
   exit 1
 elif [[ "$osname" != 'Linux' ]]; then
-  fancy_echo "Oops, it looks like you're using a non-supported OS. Exiting..."
+  bootstrap_echo "Oops, it looks like you're using a non-supported OS. Exiting..."
   exit 1
 fi
 
@@ -67,12 +67,12 @@ fi
 # 1. Update the system.
 ################################################################################
 
-fancy_echo "$divider Step 1: Updating system packages ..."
+bootstrap_echo "$divider Step 1: Updating system packages ..."
 
 if command -v aptitude >/dev/null; then
-  fancy_echo "Using aptitude ..."
+  bootstrap_echo "Using aptitude ..."
 else
-  fancy_echo "Installing aptitude ..."
+  bootstrap_echo "Installing aptitude ..."
   sudo apt-get install -y aptitude
 fi
 
@@ -82,52 +82,52 @@ sudo aptitude update
 # 2. Install basic tools
 ################################################################################
 
-fancy_echo "$divider Step 2: Installing basic tools..."
+bootstrap_echo "$divider Step 2: Installing basic tools..."
 
-fancy_echo "Installing curl ..."
+bootstrap_echo "Installing curl ..."
 sudo aptitude install -y curl
 
-fancy_echo "Installing git..."
+bootstrap_echo "Installing git..."
 sudo aptitude install -y git
 
-fancy_echo "Installing python software properties..."
+bootstrap_echo "Installing python software properties..."
 sudo aptitude install -y python-software-properties
 
-fancy_echo "Installing build-essential..."
+bootstrap_echo "Installing build-essential..."
 sudo aptitude install -y build-essential
 
-fancy_echo "Installing libraries for common Ruby/Rails/gem dependencies..."
+bootstrap_echo "Installing libraries for common Ruby/Rails/gem dependencies..."
 sudo aptitude install -y zlib1g-dev libssl-dev libreadline-dev libyaml-dev libsqlite3-dev libxml2-dev libxslt1-dev libcurl4-openssl-dev libffi-dev
 
-fancy_echo "Installing sqlite3..."
+bootstrap_echo "Installing sqlite3..."
 sudo aptitude install -y sqlite3
 
-fancy_echo "Installing Postgres..."
+bootstrap_echo "Installing Postgres..."
 sudo aptitude install -y postgresql postgresql-server-dev-all
 
-fancy_echo "Installing Redis..."
+bootstrap_echo "Installing Redis..."
 sudo aptitude install -y redis-server
 
-fancy_echo "Installing ctags..."
+bootstrap_echo "Installing ctags..."
 sudo aptitude install -y exuberant-ctags
 
-fancy_echo "Installing vim ..."
+bootstrap_echo "Installing vim ..."
 sudo aptitude remove vim-tiny -y
 sudo aptitude install -y vim-gtk
 
-fancy_echo "Installing htop..."
+bootstrap_echo "Installing htop..."
 sudo aptitude install -y htop
 
-fancy_echo "Installing tree..."
+bootstrap_echo "Installing tree..."
 sudo aptitude install -y tree
 
 if grep -qiE 'precise|saucy|trusty|utopic|vivid' /etc/os-release; then
-  fancy_echo "Adding tmux ppa:pi-rho/dev..."
+  bootstrap_echo "Adding tmux ppa:pi-rho/dev..."
   sudo add-apt-repository -y ppa:pi-rho/dev
   sudo aptitude update
 fi
 
-fancy_echo "Installing tmux..." # http://stackoverflow.com/a/25952511
+bootstrap_echo "Installing tmux..." # http://stackoverflow.com/a/25952511
 if grep -qiE 'trusty' /etc/os-release; then
   sudo aptitude install -y tmux=2.0-1~ppa1~t
 elif grep -qiE 'vivid' /etc/os-release; then
@@ -137,31 +137,31 @@ else
 fi
 
 
-fancy_echo "Installing ImageMagick..."
+bootstrap_echo "Installing ImageMagick..."
 sudo aptitude install -y imagemagick
 
-fancy_echo "Installing zsh..."
+bootstrap_echo "Installing zsh..."
 sudo aptitude install -y zsh
 
-fancy_echo "Installing node..."
+bootstrap_echo "Installing node..."
 sudo aptitude install -y nodejs
 
-fancy_echo "Installing xclip..."
+bootstrap_echo "Installing xclip..."
 sudo aptitude install -y xclip
 
 if grep -qiE 'precise|saucy|trusty|utopic|vivid|wheezy' /etc/os-release; then
-  fancy_echo "Installing gnome-tweak-tool..."
+  bootstrap_echo "Installing gnome-tweak-tool..."
   sudo aptitude install -y gnome-tweak-tool
 fi
 
-fancy_echo "Cloning linux-bootstrap repo..."
+bootstrap_echo "Cloning linux-bootstrap repo..."
 git clone $BOOTSTRAP_REPO_URL -b $BOOTSTRAP_BRANCH $BOOTSTRAP_DIR
 
 ################################################################################
 # 3. Install oh-my-zsh
 ################################################################################
 
-fancy_echo "$divider Step 3: Installing oh-my-zsh..."
+bootstrap_echo "$divider Step 3: Installing oh-my-zsh..."
 
 if [ -d "$HOME/.oh-my-zsh" ]; then
   rm -rf $HOME/.oh-my-zsh
@@ -169,7 +169,7 @@ fi
 
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
-fancy_echo "Changing your shell to zsh ..."
+bootstrap_echo "Changing your shell to zsh ..."
 chsh -s $(which zsh)
 
 
@@ -177,15 +177,15 @@ chsh -s $(which zsh)
 # 4. Setup dotfiles
 ################################################################################
 
-fancy_echo "$divider Step 4: Installing dotfiles..."
+bootstrap_echo "$divider Step 4: Installing dotfiles..."
 if [[ -d $DOTFILES_DIR ]]; then
-  fancy_echo "Backing up old dotfiles to $HOME/old_dotfiles_backup..."
+  bootstrap_echo "Backing up old dotfiles to $HOME/old_dotfiles_backup..."
   rm -rf $OLD_DOTFILES_BACKUP
   cp -R $DOTFILES_DIR $OLD_DOTFILES_BACKUP
   rm -rf $DOTFILES_DIR
 fi
 
-fancy_echo "Cloning your dotfiles repo to ${DOTFILES_DIR} ..."
+bootstrap_echo "Cloning your dotfiles repo to ${DOTFILES_DIR} ..."
 
 git clone $DOTFILES_REPO_URL -b $DOTFILES_BRANCH $DOTFILES_DIR
 source $DOTFILES_DIR/install.sh
@@ -198,7 +198,7 @@ cp -R $BOOTSTRAP_DIR/bin/colortest $HOME/bin/
 # 5. Install Powerline-patched fonts
 ################################################################################
 
-fancy_echo "$divider Step 5: Installing fixed-width fonts patched for use with Powerline symbols..."
+bootstrap_echo "$divider Step 5: Installing fixed-width fonts patched for use with Powerline symbols..."
 if [ -d "$HOME/src/fonts" ]; then
   rm -rf $HOME/src/fonts
 fi
@@ -208,14 +208,14 @@ cd $HOME/src/fonts
 cd $HOME
 rm -rf $HOME/src/fonts
 
-fancy_echo "Done!"
+bootstrap_echo "Done!"
 
 
 ################################################################################
 # 6. Install Vundle and vim plugins
 ################################################################################
 
-fancy_echo "$divider Step 6: Installing Vundle and vim plugins..."
+bootstrap_echo "$divider Step 6: Installing Vundle and vim plugins..."
 if [ -d $HOME/.vim/bundle ]; then
   rm -rf $HOME/.vim/bundle
 fi
@@ -224,16 +224,16 @@ cp -R $DOTFILES_DIR/vim/colors $HOME/.vim # So vim won't complain about solarize
 vim +PluginInstall +qall
 rm -rf $HOME/.vim/colors
 
-fancy_echo "Done!"
+bootstrap_echo "Done!"
 
 
 ################################################################################
 # 7. Install rbenv and ruby-build
 ################################################################################
 
-fancy_echo "$divider Step 7: Installing rbenv and ruby-build..."
+bootstrap_echo "$divider Step 7: Installing rbenv and ruby-build..."
 if [[ ! -d "$HOME/.rbenv" ]]; then
-  fancy_echo "Installing rbenv..."
+  bootstrap_echo "Installing rbenv..."
   git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 
   export PATH="$HOME/.rbenv/bin:$PATH"
@@ -241,7 +241,7 @@ if [[ ! -d "$HOME/.rbenv" ]]; then
 fi
 
 if [[ ! -d "$HOME/.rbenv/plugins/ruby-build" ]]; then
-  fancy_echo "Installing ruby-build..."
+  bootstrap_echo "Installing ruby-build..."
   git clone https://github.com/sstephenson/ruby-build.git \
     ~/.rbenv/plugins/ruby-build
 fi
@@ -250,21 +250,21 @@ fi
 # 8. Install Ruby, Rails, and friends
 ################################################################################
 
-fancy_echo "$divider Step 8: Installing Ruby, Rails, and friends..."
+bootstrap_echo "$divider Step 8: Installing Ruby, Rails, and friends..."
 
-fancy_echo "Installing Ruby $ruby_version ..."
+bootstrap_echo "Installing Ruby $ruby_version ..."
 rbenv install -s "$ruby_version"
 
-fancy_echo "Setting $ruby_version as global default Ruby ..."
+bootstrap_echo "Setting $ruby_version as global default Ruby ..."
 rbenv global "$ruby_version"
 
-fancy_echo "Updating to latest Rubygems version ..."
+bootstrap_echo "Updating to latest Rubygems version ..."
 gem update --system
 
-fancy_echo "Installing Bundler..."
+bootstrap_echo "Installing Bundler..."
 gem install bundler --no-document --pre
 
-fancy_echo "Installing Rails..."
+bootstrap_echo "Installing Rails..."
 gem install rails
 
 
@@ -273,7 +273,7 @@ gem install rails
 ################################################################################
 
 if grep -qiE 'precise|saucy|trusty|utopic|vivid' /etc/os-release; then
-  fancy_echo "$divider Step 9: Installing Google Chrome..."
+  bootstrap_echo "$divider Step 9: Installing Google Chrome..."
 
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
   sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
