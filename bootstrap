@@ -47,6 +47,7 @@ BOOTSTRAP_REPO_URL="https://github.com/joshukraine/linux-bootstrap.git"
 BOOTSTRAP_BRANCH="master"
 BOOTSTRAP_DIR=$HOME/linux-bootstrap
 
+
 ################################################################################
 # Make sure we're on Linux before continuing
 ################################################################################
@@ -76,6 +77,7 @@ else
 fi
 
 sudo aptitude update
+
 
 ################################################################################
 # 2. Install basic tools
@@ -142,9 +144,6 @@ sudo aptitude install -y imagemagick
 bootstrap_echo "Installing zsh..."
 sudo aptitude install -y zsh
 
-bootstrap_echo "Installing node..."
-sudo aptitude install -y nodejs
-
 bootstrap_echo "Installing xclip..."
 sudo aptitude install -y xclip
 
@@ -153,8 +152,18 @@ if grep -qiE 'precise|saucy|trusty|utopic|vivid|wheezy' /etc/os-release; then
   sudo aptitude install -y gnome-tweak-tool
 fi
 
+bootstrap_echo "Installing node via NVM..."
+export NVM_DIR="$HOME/.nvm" && (
+  git clone https://github.com/creationix/nvm.git "$NVM_DIR"
+  cd "$NVM_DIR"
+  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`
+) && . "$NVM_DIR/nvm.sh"
+
+nvm install 5
+
 bootstrap_echo "Cloning linux-bootstrap repo..."
 git clone $BOOTSTRAP_REPO_URL -b $BOOTSTRAP_BRANCH $BOOTSTRAP_DIR
+
 
 ################################################################################
 # 3. Install oh-my-zsh
