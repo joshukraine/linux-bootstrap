@@ -36,7 +36,6 @@ set -u # Prevent unset variables
 ################################################################################
 
 osname=$(uname)
-divider="====> "
 ruby_version="2.3.1"
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
@@ -67,7 +66,7 @@ fi
 # 1. Update the system.
 ################################################################################
 
-bootstrap_echo "$divider Step 1: Updating system packages ..."
+bootstrap_echo "Step 1: Updating system packages ..."
 
 if command -v aptitude >/dev/null; then
   bootstrap_echo "Using aptitude ..."
@@ -82,7 +81,7 @@ sudo aptitude update
 # 2. Install basic tools
 ################################################################################
 
-bootstrap_echo "$divider Step 2: Installing basic tools..."
+bootstrap_echo "Step 2: Installing basic tools..."
 
 bootstrap_echo "Installing curl ..."
 sudo aptitude install -y curl
@@ -161,7 +160,7 @@ git clone $BOOTSTRAP_REPO_URL -b $BOOTSTRAP_BRANCH $BOOTSTRAP_DIR
 # 3. Install oh-my-zsh
 ################################################################################
 
-bootstrap_echo "$divider Step 3: Installing oh-my-zsh..."
+bootstrap_echo "Step 3: Installing oh-my-zsh..."
 
 if [ -d "$HOME/.oh-my-zsh" ]; then
   rm -rf $HOME/.oh-my-zsh
@@ -177,7 +176,7 @@ chsh -s $(which zsh)
 # 4. Setup dotfiles
 ################################################################################
 
-bootstrap_echo "$divider Step 4: Installing dotfiles..."
+bootstrap_echo "Step 4: Installing dotfiles..."
 if [[ -d $DOTFILES_DIR ]]; then
   bootstrap_echo "Backing up old dotfiles to $HOME/old_dotfiles_backup..."
   rm -rf $OLD_DOTFILES_BACKUP
@@ -198,7 +197,7 @@ cp -R $BOOTSTRAP_DIR/bin/colortest $HOME/bin/
 # 5. Install Powerline-patched fonts
 ################################################################################
 
-bootstrap_echo "$divider Step 5: Installing fixed-width fonts patched for use with Powerline symbols..."
+bootstrap_echo "Step 5: Installing fixed-width fonts patched for use with Powerline symbols..."
 if [ -d "$HOME/src/fonts" ]; then
   rm -rf $HOME/src/fonts
 fi
@@ -215,7 +214,7 @@ bootstrap_echo "Done!"
 # 6. Install Vundle and vim plugins
 ################################################################################
 
-bootstrap_echo "$divider Step 6: Installing Vundle and vim plugins..."
+bootstrap_echo "Step 6: Installing Vundle and vim plugins..."
 if [ -d $HOME/.vim/bundle ]; then
   rm -rf $HOME/.vim/bundle
 fi
@@ -231,7 +230,7 @@ bootstrap_echo "Done!"
 # 7. Install rbenv and ruby-build
 ################################################################################
 
-bootstrap_echo "$divider Step 7: Installing rbenv and ruby-build..."
+bootstrap_echo "Step 7: Installing rbenv and ruby-build..."
 if [[ ! -d "$HOME/.rbenv" ]]; then
   bootstrap_echo "Installing rbenv..."
   git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
@@ -250,7 +249,7 @@ fi
 # 8. Install Ruby, Rails, and friends
 ################################################################################
 
-bootstrap_echo "$divider Step 8: Installing Ruby, Rails, and friends..."
+bootstrap_echo "Step 8: Installing Ruby, Rails, and friends..."
 
 bootstrap_echo "Installing Ruby $ruby_version ..."
 rbenv install -s "$ruby_version"
@@ -273,7 +272,7 @@ gem install rails
 ################################################################################
 
 if grep -qiE 'precise|saucy|trusty|utopic|vivid' /etc/os-release; then
-  bootstrap_echo "$divider Step 9: Installing Google Chrome..."
+  bootstrap_echo "Step 9: Installing Google Chrome..."
 
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
   sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
