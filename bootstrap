@@ -37,7 +37,7 @@ set -u # Prevent unset variables
 
 osname=$(uname)
 divider="====> "
-ruby_version="2.3.0"
+ruby_version="2.3.1"
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
 DOTFILES_REPO_URL="https://github.com/joshukraine/linux-dotfiles.git"
