@@ -281,17 +281,18 @@ bootstrap_echo "Done!"
 
 
 ################################################################################
-# 10. Install Google Chrome
+# 10. Set up Tmuxinator (https://github.com/tmuxinator/tmuxinator)
 ################################################################################
 
-if grep -qiE 'precise|saucy|trusty|utopic|vivid' /etc/os-release; then
-  bootstrap_echo "Step 10: Installing Google Chrome..."
+bootstrap_echo "Step 10: Setting up Tmuxinator..."
 
-  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-  sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-  sudo aptitude update
-  sudo aptitude install -y google-chrome-stable
+gem install tmuxinator
+
+if [ ! -d "$HOME/.tmuxinator/" ]; then
+  mkdir "$HOME/.tmuxinator"
 fi
+
+cp $BOOTSTRAP_DIR/lib/default.yml $HOME/.tmuxinator/
 
 bootstrap_echo "Done!"
 
