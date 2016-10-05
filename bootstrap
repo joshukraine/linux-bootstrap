@@ -97,6 +97,7 @@ sudo aptitude install -y python-software-properties
 bootstrap_echo "Installing build-essential..."
 sudo aptitude install -y build-essential
 
+# https://gorails.com/setup/ubuntu/14.04
 bootstrap_echo "Installing libraries for common Ruby/Rails/gem dependencies..."
 sudo aptitude install -y zlib1g-dev libssl-dev libreadline-dev libyaml-dev libsqlite3-dev libxml2-dev libxslt1-dev libcurl4-openssl-dev libffi-dev
 
@@ -112,7 +113,7 @@ sudo aptitude install -y redis-server
 bootstrap_echo "Installing ctags..."
 sudo aptitude install -y exuberant-ctags
 
-bootstrap_echo "Installing vim ..."
+bootstrap_echo "Installing Vim ..."
 sudo aptitude remove vim-tiny -y
 sudo aptitude install -y vim-gtk
 
@@ -136,7 +137,6 @@ elif grep -qiE 'vivid' /etc/os-release; then
 else
   sudo aptitude install -y tmux
 fi
-
 
 bootstrap_echo "Installing ImageMagick..."
 sudo aptitude install -y imagemagick
@@ -198,15 +198,20 @@ bootstrap_echo "Cloning your dotfiles repo to ${DOTFILES_DIR} ..."
 git clone $DOTFILES_REPO_URL -b $DOTFILES_BRANCH $DOTFILES_DIR
 source $DOTFILES_DIR/install.sh
 
+
+################################################################################
+# 5. Install ~/bin utilities
+################################################################################
+
 mkdir $HOME/bin
-cp -R $BOOTSTRAP_DIR/bin/tat $HOME/bin/
-cp -R $BOOTSTRAP_DIR/bin/colortest $HOME/bin/
+cp -R $BOOTSTRAP_DIR/bin/* $HOME/bin/
+
 
 ################################################################################
-# 5. Install Powerline-patched fonts
+# 6. Install Powerline-patched fonts
 ################################################################################
 
-bootstrap_echo "Step 5: Installing fixed-width fonts patched for use with Powerline symbols..."
+bootstrap_echo "Step 6: Installing fixed-width fonts patched for use with Powerline symbols..."
 if [ -d "$HOME/src/fonts" ]; then
   rm -rf $HOME/src/fonts
 fi
@@ -220,15 +225,15 @@ bootstrap_echo "Done!"
 
 
 ################################################################################
-# 6. Install Vundle and vim plugins
+# 7. Install Vundle and Vim plugins
 ################################################################################
 
-bootstrap_echo "Step 6: Installing Vundle and vim plugins..."
+bootstrap_echo "Step 7: Installing Vundle and Vim plugins..."
 if [ -d $HOME/.vim/bundle ]; then
   rm -rf $HOME/.vim/bundle
 fi
 git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-cp -R $DOTFILES_DIR/vim/colors $HOME/.vim # So vim won't complain about solarized not being found.
+cp -R $DOTFILES_DIR/vim/colors $HOME/.vim # So Vim won't complain about solarized not being found.
 vim +PluginInstall +qall
 rm -rf $HOME/.vim/colors
 
@@ -236,10 +241,10 @@ bootstrap_echo "Done!"
 
 
 ################################################################################
-# 7. Install rbenv and ruby-build
+# 8. Install rbenv and ruby-build
 ################################################################################
 
-bootstrap_echo "Step 7: Installing rbenv and ruby-build..."
+bootstrap_echo "Step 8: Installing rbenv and ruby-build..."
 if [[ ! -d "$HOME/.rbenv" ]]; then
   bootstrap_echo "Installing rbenv..."
   git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
@@ -254,11 +259,14 @@ if [[ ! -d "$HOME/.rbenv/plugins/ruby-build" ]]; then
     ~/.rbenv/plugins/ruby-build
 fi
 
+bootstrap_echo "Done!"
+
+
 ################################################################################
-# 8. Install Ruby, Rails, and friends
+# 9. Install Ruby, Rails, and friends
 ################################################################################
 
-bootstrap_echo "Step 8: Installing Ruby, Rails, and friends..."
+bootstrap_echo "Step 9: Installing Ruby, Rails, and friends..."
 
 bootstrap_echo "Installing Ruby $ruby_version ..."
 rbenv install -s "$ruby_version"
@@ -275,13 +283,15 @@ gem install bundler --no-document --pre
 bootstrap_echo "Installing Rails..."
 gem install rails
 
+bootstrap_echo "Done!"
+
 
 ################################################################################
-# 9. Install Google Chrome
+# 10. Install Google Chrome
 ################################################################################
 
 if grep -qiE 'precise|saucy|trusty|utopic|vivid' /etc/os-release; then
-  bootstrap_echo "Step 9: Installing Google Chrome..."
+  bootstrap_echo "Step 10: Installing Google Chrome..."
 
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
   sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
@@ -289,8 +299,10 @@ if grep -qiE 'precise|saucy|trusty|utopic|vivid' /etc/os-release; then
   sudo aptitude install -y google-chrome-stable
 fi
 
+bootstrap_echo "Done!"
+
 echo ""
-echo "**************************************************************"
-echo "**** Setup script complete! Please restart your computer. ****"
-echo "**************************************************************"
+echo "******************************************************************"
+echo "**** Bootstrap script complete! Please restart your computer. ****"
+echo "******************************************************************"
 echo ""
