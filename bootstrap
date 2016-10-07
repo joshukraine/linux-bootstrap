@@ -197,7 +197,11 @@ source $DOTFILES_DIR/install.sh
 ################################################################################
 
 bootstrap_echo "Step 5: Installing bin utilities..."
-mkdir $HOME/bin
+
+if [ -d "$HOME/bin" ]; then
+  mkdir $HOME/bin
+fi
+
 cp -R $BOOTSTRAP_DIR/bin/* $HOME/bin/
 
 
