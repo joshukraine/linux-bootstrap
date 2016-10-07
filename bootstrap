@@ -12,10 +12,7 @@
 ################################################################################
 
 
-################################################################################
-# First, some helpful functions borrowed from Laptop. Thank you, thoughtbot. :)
-################################################################################
-
+# Thank you, thoughtbot! :)
 bootstrap_echo() {
   local fmt="$1"; shift
 
@@ -198,7 +195,7 @@ source $DOTFILES_DIR/install.sh
 
 bootstrap_echo "Step 5: Installing bin utilities..."
 
-if [ -d "$HOME/bin" ]; then
+if [ ! -d "$HOME/bin" ]; then
   mkdir $HOME/bin
 fi
 
