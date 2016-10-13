@@ -76,3 +76,8 @@ Helpful web resources on dotfiles, et al.
 * http://carlosbecker.com/posts/first-steps-with-mac-os-x-as-a-developer/
 * https://mattstauffer.co/blog/setting-up-a-new-os-x-development-machine-part-1-core-files-and-custom-shell
 * http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/
+
+License
+-------
+
+Copyright (c) 2016 Joshua Steele. [MIT License](https://github.com/joshukraine/linux-bootstrap/blob/master/LICENSE)
