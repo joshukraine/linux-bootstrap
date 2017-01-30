@@ -97,7 +97,15 @@ bootstrap_echo "Installing sqlite3..."
 sudo aptitude install -y sqlite3
 
 bootstrap_echo "Installing Postgres..."
-sudo aptitude install -y postgresql postgresql-server-dev-all
+if grep -qiE 'xenial' /etc/os-release; then
+  sudo add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
+  wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+  sudo apt-get update
+  sudo apt-get install postgresql-common
+  sudo apt-get install postgresql-9.6 libpq-dev
+else
+  sudo aptitude install -y postgresql
+fi
 
 bootstrap_echo "Installing Redis..."
 sudo aptitude install -y redis-server
