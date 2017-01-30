@@ -75,21 +75,23 @@ sudo aptitude update
 
 bootstrap_echo "Step 2: Installing basic tools..."
 
+bootstrap_echo "Installing build-essential..."
+sudo aptitude install -y build-essential
+
 bootstrap_echo "Installing curl ..."
 sudo aptitude install -y curl
-
-bootstrap_echo "Installing git..."
-sudo aptitude install -y git
 
 bootstrap_echo "Installing python software properties..."
 sudo aptitude install -y python-software-properties
 
-bootstrap_echo "Installing build-essential..."
-sudo aptitude install -y build-essential
+bootstrap_echo "Installing other useful libraries..."
+sudo aptitude install -y zlib1g-dev libssl-dev libreadline-dev libyaml-dev libsqlite3-dev libxml2-dev libxslt1-dev libcurl4-openssl-dev libffi-dev libcurl4-gnutls-dev libexpat1-dev gettext unzip
 
-# https://gorails.com/setup/ubuntu/14.04
-bootstrap_echo "Installing libraries for common Ruby/Rails/gem dependencies..."
-sudo aptitude install -y zlib1g-dev libssl-dev libreadline-dev libyaml-dev libsqlite3-dev libxml2-dev libxslt1-dev libcurl4-openssl-dev libffi-dev
+# http://sourcedigit.com/21550-git-2-11-released-how-to-install-git-on-ubuntu-16-10/
+bootstrap_echo "Installing git..."
+sudo add-apt-repository ppa:git-core/ppa
+sudo aptitude update
+sudo aptitude install -y git
 
 bootstrap_echo "Installing sqlite3..."
 sudo aptitude install -y sqlite3
