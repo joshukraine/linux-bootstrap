@@ -26,7 +26,7 @@ bootstrap_echo() {
 ################################################################################
 
 osname=$(uname)
-ruby_version="2.3.1"
+ruby_version="2.3.3"
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
 DOTFILES_REPO_URL="https://github.com/joshukraine/linux-dotfiles.git"
