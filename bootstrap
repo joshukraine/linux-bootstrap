@@ -281,7 +281,7 @@ bootstrap_echo "Done!"
 
 
 ################################################################################
-# 9. Install Ruby, Rails, and friends
+# 9. Install Ruby and Bundler
 ################################################################################
 
 bootstrap_echo "Step 9: Installing Ruby & Bundler..."
