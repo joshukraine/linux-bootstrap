@@ -36,14 +36,14 @@ What does it do?
 
 When you invoke `bootstrap`, this is what it does in a nutshell:
 
-* Patch the system and install various software packages
-* Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+* Patch the system and install various software packages.
+* Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
 * Symlink dotfiles to `$HOME`
 * Install several fixed-width fonts.
 * Install Vundle and plugins for vim.
-* Install [rbenv](https://github.com/sstephenson/rbenv) and [ruby-build](https://github.com/sstephenson/ruby-build#readme)
-* Install Ruby, Rails and related packages
-* Install Google Chrome (for compatible distros)
+* Install [rbenv](https://github.com/sstephenson/rbenv) and [ruby-build](https://github.com/sstephenson/ruby-build#readme).
+* Install Ruby and Bundler.
+* Set up Tmuxinator.
 
 
 Some of my favorite dotfile repos
