@@ -10,7 +10,7 @@ Supported distros
 
 This script has been successfully tested on the following Linux distros:
 
-* Ubuntu 14.04, 15.04
+* Ubuntu 14.04, 15.04, 16.04
 * Lubuntu 14.10, 15.04
 * Debian 7.8, 8.2
 
