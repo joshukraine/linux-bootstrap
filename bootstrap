@@ -153,6 +153,7 @@ if grep -qiE 'precise|saucy|trusty|utopic|vivid|wheezy' /etc/os-release; then
 fi
 
 bootstrap_echo "Installing node via NVM..."
+# shellcheck source=/dev/null
 export NVM_DIR="$HOME"/.nvm && (
   git clone https://github.com/creationix/nvm.git "$NVM_DIR"
   cd "$NVM_DIR"
@@ -198,6 +199,7 @@ bootstrap_echo "Cloning your dotfiles repo to ${DOTFILES_DIR} ..."
 
 git clone "$DOTFILES_REPO_URL" -b "$DOTFILES_BRANCH" "$DOTFILES_DIR"
 
+# shellcheck source=/dev/null
 source "$DOTFILES_DIR"/install.sh
 
 
