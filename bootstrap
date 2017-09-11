@@ -31,7 +31,7 @@ OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
 DOTFILES_REPO_URL="https://github.com/speedy1812/dotfiles.git"
 DOTFILES_BRANCH="master"
-DOTFILES_DIR=$HOME/dotfiles
+DOTFILES_DIR=$HOME/.dotfiles
 
 BOOTSTRAP_REPO_URL="https://github.com/speedy1812/linux-bootstrap.git"
 BOOTSTRAP_BRANCH="master"
