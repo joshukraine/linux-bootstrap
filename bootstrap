@@ -104,6 +104,10 @@ sudo aptitude install -y python-software-properties
 bootstrap_echo "Installing other useful libraries..."
 sudo aptitude install -y zlib1g-dev libssl-dev libreadline-dev libyaml-dev libsqlite3-dev libxml2-dev libxslt1-dev libcurl4-openssl-dev libffi-dev libcurl4-gnutls-dev libexpat1-dev gettext unzip gcc make
 
+# https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit#debian--ubuntu
+bootstrap_echo "Installing libraries for Capybara..."
+sudo aptitude install -y qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+
 # http://sourcedigit.com/21550-git-2-11-released-how-to-install-git-on-ubuntu-16-10/
 bootstrap_echo "Installing git..."
 sudo add-apt-repository -y ppa:git-core/ppa
