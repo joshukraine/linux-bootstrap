@@ -54,10 +54,15 @@ fi
 
 
 ################################################################################
-# 1. Update the system.
+# 1. Clean out unneeded software and update the system.
 ################################################################################
 
-bootstrap_echo "Step 1: Updating system packages ..."
+bootstrap_echo "Step 1: Cleaning out unneeded software ..."
+
+sudo apt-get purge thunderbird\*
+sudo apt-get remove --purge libreoffice\*
+
+bootstrap_echo "Updating system packages ..."
 
 if command -v aptitude >/dev/null; then
   bootstrap_echo "Using aptitude ..."
@@ -304,18 +309,12 @@ bootstrap_echo "Done!"
 
 
 ################################################################################
-# 10. Set up Tmuxinator (https://github.com/tmuxinator/tmuxinator)
+# 10. Set up Tmux Plugin Manager (https://github.com/tmux-plugins/tpm)
 ################################################################################
 
-bootstrap_echo "Step 10: Setting up Tmuxinator..."
+bootstrap_echo "Step 10: Setting up Tmux Plugin Manager..."
 
-gem install tmuxinator
-
-if [ ! -d "$HOME"/.tmuxinator/ ]; then
-  mkdir "$HOME"/.tmuxinator
-fi
-
-cp "$BOOTSTRAP_DIR"/lib/default.yml "$HOME"/.tmuxinator/
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 bootstrap_echo "Done!"
 
