@@ -52,6 +52,17 @@ elif [[ "$osname" != 'Linux' ]]; then
   exit 1
 fi
 
+################################################################################
+# Make sure SSH keys are set up before continuing
+################################################################################
+
+if [ ! -d $HOME/.ssh ]; then
+  bootstrap_echo "You must generate your SSH keys before continuing, otherwise
+  the dotfiles will not be able to be cloned."
+  bootstrap_echo "Follow the directions at the link below:"
+  bootstrap_echo "https://confluence.atlassian.com/bitbucket/set-up-ssh-for-git-728138079.html"
+  exit 1
+fi
 
 ################################################################################
 # 1. Clean out unneeded software and update the system.
