@@ -26,14 +26,14 @@ bootstrap_echo() {
 ################################################################################
 
 osname=$(uname)
-ruby_version="2.3.3"
+ruby_version="2.4.1"
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
-DOTFILES_REPO_URL="https://github.com/joshukraine/linux-dotfiles.git"
+DOTFILES_REPO_URL="https://github.com/speedy1812/dotfiles.git"
 DOTFILES_BRANCH="master"
 DOTFILES_DIR=$HOME/dotfiles
 
-BOOTSTRAP_REPO_URL="https://github.com/joshukraine/linux-bootstrap.git"
+BOOTSTRAP_REPO_URL="https://github.com/speedy1812/linux-bootstrap.git"
 BOOTSTRAP_BRANCH="master"
 BOOTSTRAP_DIR=$HOME/linux-bootstrap
 
@@ -115,7 +115,7 @@ sudo aptitude install -y exuberant-ctags
 
 bootstrap_echo "Installing Vim ..."
 sudo aptitude remove vim-tiny -y
-sudo aptitude install -y vim-gtk
+sudo aptitude install -y vim-gnome
 
 bootstrap_echo "Installing htop..."
 sudo aptitude install -y htop
@@ -138,19 +138,8 @@ else
   sudo aptitude install -y tmux
 fi
 
-bootstrap_echo "Installing ImageMagick..."
-sudo aptitude install -y imagemagick
-
 bootstrap_echo "Installing zsh..."
 sudo aptitude install -y zsh
-
-bootstrap_echo "Installing xclip..."
-sudo aptitude install -y xclip
-
-if grep -qiE 'precise|saucy|trusty|utopic|vivid|wheezy' /etc/os-release; then
-  bootstrap_echo "Installing gnome-tweak-tool..."
-  sudo aptitude install -y gnome-tweak-tool
-fi
 
 bootstrap_echo "Installing node via NVM..."
 # shellcheck source=/dev/null
