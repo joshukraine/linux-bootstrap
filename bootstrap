@@ -29,7 +29,7 @@ osname=$(uname)
 ruby_version="2.4.1"
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
-DOTFILES_REPO_URL="https://github.com/speedy1812/dotfiles.git"
+DOTFILES_REPO_URL="git@bitbucket.org:speedy1812/dotfiles.git"
 DOTFILES_BRANCH="master"
 DOTFILES_DIR=$HOME/.dotfiles
 
