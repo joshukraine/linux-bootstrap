@@ -20,13 +20,13 @@ Installation
 To install with a one-liner, run this:
 
 ```sh
-bash <(wget -qO- https://raw.githubusercontent.com/joshukraine/linux-bootstrap/master/bootstrap) 2>&1 | tee ~/bootstrap.log
+bash <(wget -qO- https://raw.githubusercontent.com/speedy1812/linux-bootstrap/master/bootstrap) 2>&1 | tee ~/bootstrap.log
 ```
 
 Want to read through the script first?
 
 ```sh
-wget -qO- https://raw.githubusercontent.com/joshukraine/linux-bootstrap/master/bootstrap > bootstrap
+wget -qO- https://raw.githubusercontent.com/speedy1812/linux-bootstrap/master/bootstrap > bootstrap
 less bootstrap
 bash bootstrap 2>&1 | tee ~/bootstrap.log
 ```
