@@ -5,7 +5,7 @@ The purpose of this script is to provision a new machine running a fresh install
 
 &#9657; **Running macOS? Check out [Mac Bootstrap](http://jsua.co/macos).**
 
-For more Linux bootstrap options, be sure to check out Joshua Steele's [Linux Bootstrap](https://github.com/speedy1812/linux-bootstrap/blob/master/LICENSE), from which this repo was forked.
+For more Linux bootstrap options, be sure to check out Joshua Steele's [Linux Bootstrap](https://github.com/joshukraine/linux-bootstrap), from which this repo was forked.
 
 Supported distros
 -----------------
