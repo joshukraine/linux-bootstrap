@@ -220,7 +220,6 @@ ln -nfs ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -nfs ~/.dotfiles/railsrc ~/.railsrc
 ln -nfs ~/.dotfiles/vimrc ~/.vimrc
 ln -nfs ~/.dotfiles/zshrc ~/.zshrc
-ln -nfs ~/.dotfiles/.zshrc.local ~/.zshrc.local
 source ~/.zshrc
 
 ################################################################################
