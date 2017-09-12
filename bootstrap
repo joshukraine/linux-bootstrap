@@ -270,7 +270,9 @@ fi
 
 git clone https://github.com/gmarik/Vundle.vim.git "$HOME/.vim/bundle/Vundle.vim"
 
-cp -R "$DOTFILES_DIR"/vim/colors "$HOME"/.vim # So Vim won't complain about solarized not being found.
+# So Vim won't complain about solarized not being found:
+mkdir "$HOME"/.vim/colors
+touch "$HOME"/.vim/colors/solarized.vim
 
 vim +PluginInstall +qall
 
