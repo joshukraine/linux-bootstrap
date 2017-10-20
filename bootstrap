@@ -33,7 +33,7 @@ DOTFILES_REPO_URL="git@bitbucket.org:speedy1812/dotfiles.git"
 DOTFILES_BRANCH="master"
 DOTFILES_DIR=$HOME/.dotfiles
 
-BOOTSTRAP_REPO_URL="https://github.com/speedy1812/linux-bootstrap.git"
+BOOTSTRAP_REPO_URL="git@github.com:speedy1812/linux-bootstrap.git"
 BOOTSTRAP_BRANCH="master"
 BOOTSTRAP_DIR=$HOME/linux-bootstrap
 
