@@ -171,6 +171,10 @@ export NVM_DIR="$HOME"/.nvm && (
 
 nvm install --lts
 
+# The Silver Searcher is require for the ag.vim plugin
+bootstrap_echo "Installing Silver Searcher..."
+sudo aptitude install -y silversearcher-ag
+
 bootstrap_echo "Cloning linux-bootstrap repo..."
 git clone "$BOOTSTRAP_REPO_URL" -b "$BOOTSTRAP_BRANCH" "$BOOTSTRAP_DIR"
 
