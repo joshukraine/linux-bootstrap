@@ -26,7 +26,9 @@ bootstrap_echo() {
 ################################################################################
 
 osname=$(uname)
-ruby_version="2.4.1"
+asdf_branch="0.4.0"
+ruby_version="2.4.2"
+nodejs_version="6.12.1"
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
 DOTFILES_REPO_URL="git@bitbucket.org:speedy1812/dotfiles.git"
@@ -161,16 +163,6 @@ fi
 bootstrap_echo "Installing zsh..."
 sudo aptitude install -y zsh
 
-bootstrap_echo "Installing node via NVM..."
-# shellcheck source=/dev/null
-export NVM_DIR="$HOME"/.nvm && (
-  git clone https://github.com/creationix/nvm.git "$NVM_DIR"
-  cd "$NVM_DIR"
-  git checkout "$(git describe --abbrev=0 --tags --match "v[0-9]*" origin)"
-) && . "$NVM_DIR"/nvm.sh
-
-nvm install --lts
-
 # The Silver Searcher is require for the ag.vim plugin
 bootstrap_echo "Installing Silver Searcher..."
 sudo aptitude install -y silversearcher-ag
@@ -224,6 +216,8 @@ ln -nfs ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -nfs ~/.dotfiles/railsrc ~/.railsrc
 ln -nfs ~/.dotfiles/vimrc ~/.vimrc
 ln -nfs ~/.dotfiles/zshrc ~/.zshrc
+ln -nfs ~/.dotfiles/asdfrc ~/.asdfrc
+ln -nfs ~/.dotfiles/tool-versions ~/.tool-versions
 source ~/.zshrc
 
 ################################################################################
@@ -286,47 +280,77 @@ bootstrap_echo "Done!"
 
 
 ################################################################################
-# 8. Install rbenv and ruby-build
+# 8. Install asdf
 ################################################################################
 
-bootstrap_echo "Step 8: Installing rbenv and ruby-build..."
-if [[ ! -d "$HOME"/.rbenv ]]; then
-  bootstrap_echo "Installing rbenv..."
-  git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+bootstrap_echo "Step 8: Configuring asdf version manager..."
 
-  export PATH="$HOME"/.rbenv/bin:$PATH
-  eval "$(rbenv init - zsh)"
+append_to_zshrc() {
+local text="$1" zshrc
+local skip_new_line="${2:-0}"
+
+if [ -w "$HOME/.zshrc.local" ]; then
+	zshrc="$HOME/.zshrc.local"
+else
+	zshrc="$HOME/.zshrc"
 fi
 
-if [[ ! -d "$HOME"/.rbenv/plugins/ruby-build ]]; then
-  bootstrap_echo "Installing ruby-build..."
-  git clone https://github.com/sstephenson/ruby-build.git \
-    ~/.rbenv/plugins/ruby-build
+if ! grep -Fqs "$text" "$zshrc"; then
+	if [ "$skip_new_line" -eq 1 ]; then
+		printf "%s\n" "$text" >> "$zshrc"
+	else
+		printf "\n%s\n" "$text" >> "$zshrc"
+	fi
 fi
+}
+
+if [ ! -d "$HOME/.asdf" ]; then
+	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v"$asdf_branch"
+	append_to_zshrc "source $HOME/.asdf/asdf.sh" 1
+fi
+
+install_asdf_plugin() {
+	local name="$1"
+	local url="$2"
+
+	if ! asdf plugin-list | grep -Fq "$name"; then
+		asdf plugin-add "$name" "$url"
+	fi
+}
+
+# shellcheck disable=SC1090
+source "$HOME/.asdf/asdf.sh"
+install_asdf_plugin "ruby" "https://github.com/asdf-vm/asdf-ruby.git"
+install_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
 
 bootstrap_echo "Done!"
 
 
 ################################################################################
-# 9. Install Ruby and Bundler
+# 9. Install Ruby, Bundler, and Node
 ################################################################################
 
-bootstrap_echo "Step 9: Installing Ruby & Bundler..."
+bootstrap_echo "Step 9: Install Ruby, Bundler, and Node..."
 
 bootstrap_echo "Installing Ruby $ruby_version ..."
-rbenv install -s "$ruby_version"
-
-bootstrap_echo "Setting $ruby_version as global default Ruby ..."
-rbenv global "$ruby_version"
-
-bootstrap_echo "Updating to latest Rubygems version ..."
+asdf install ruby "$ruby_version"
 gem update --system
 
-bootstrap_echo "Installing Bundler..."
-gem install bundler --no-document --pre
+gem_install_or_update() {
+if gem list "$1" --installed > /dev/null; then
+	gem update "$@"
+else
+	gem install "$@"
+fi
+}
+
+gem_install_or_update "bundler"
+
+bootstrap_echo "Installing Node $nodejs_version ..."
+bash "$HOME/.asdf/plugins/nodejs/bin/import-release-team-keyring"
+asdf install nodejs "$nodejs_version"
 
 bootstrap_echo "Done!"
-
 
 ################################################################################
 # 10. Set up Tmux Plugin Manager (https://github.com/tmux-plugins/tpm)
