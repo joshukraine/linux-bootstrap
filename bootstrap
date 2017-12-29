@@ -210,7 +210,7 @@ git clone "$DOTFILES_REPO_URL" -b "$DOTFILES_BRANCH" "$DOTFILES_DIR"
 bootstrap_echo "Symlinking dotfiles..."
 
 ln -nfs ~/.dotfiles/gemrc ~/.gemrc
-ln -nfs ~/.dotfiles/gitignore ~/.gitignore_global
+ln -nfs ~/.dotfiles/gitignore_global ~/.gitignore_global
 ln -nfs ~/.dotfiles/gitconfig ~/.gitconfig
 ln -nfs ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -nfs ~/.dotfiles/railsrc ~/.railsrc
@@ -232,6 +232,7 @@ fi
 
 cp -R "$BOOTSTRAP_DIR"/bin/* "$HOME"/bin/
 
+bootstrap_echo "Done!"
 
 ################################################################################
 # 6. Install Powerline-patched fonts
