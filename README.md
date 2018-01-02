@@ -37,12 +37,13 @@ What does it do?
 When you invoke `bootstrap`, this is what it does in a nutshell:
 
 * Patch the system and install various software packages.
+* Install various software utilities.
 * Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
 * Symlink dotfiles to `$HOME`
 * Install several fixed-width fonts.
-* Install Vundle and plugins for vim.
-* Install [rbenv](https://github.com/sstephenson/rbenv) and [ruby-build](https://github.com/sstephenson/ruby-build#readme).
-* Install Ruby and Bundler.
+* Install [Vundle](https://github.com/VundleVim/Vundle.vim.git) and plugins for vim.
+* Install [asdf](https://github.com/asdf-vm/asdf).
+* Install Ruby, Bundler, and Node.
 * Set up Tmux.
 
 License
