@@ -135,9 +135,12 @@ sudo aptitude install -y redis-server
 bootstrap_echo "Installing ctags..."
 sudo aptitude install -y exuberant-ctags
 
-bootstrap_echo "Installing Vim ..."
-sudo aptitude remove vim-tiny -y
-sudo aptitude install -y vim-gnome
+# bootstrap_echo "Installing Vim ..."
+# sudo aptitude remove vim-tiny -y
+# sudo aptitude install -y vim-gnome
+
+# Compiling myself right now.
+# https://gist.github.com/joshukraine/b9085aeb3dd762cf1d1e1c356974032f
 
 bootstrap_echo "Installing htop..."
 sudo aptitude install -y htop
