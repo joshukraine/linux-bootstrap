@@ -221,6 +221,7 @@ ln -nfs ~/.dotfiles/vimrc ~/.vimrc
 ln -nfs ~/.dotfiles/zshrc ~/.zshrc
 ln -nfs ~/.dotfiles/asdfrc ~/.asdfrc
 ln -nfs ~/.dotfiles/tool-versions ~/.tool-versions
+ln -nfs ~/.dotfiles/default-gems ~/.default-gems
 source ~/.zshrc
 
 ################################################################################
@@ -326,6 +327,9 @@ install_asdf_plugin() {
 source "$HOME/.asdf/asdf.sh"
 install_asdf_plugin "ruby" "https://github.com/asdf-vm/asdf-ruby.git"
 install_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
+
+# Install eslint for linting Javascript
+npm install -g eslint
 
 bootstrap_echo "Done!"
 
