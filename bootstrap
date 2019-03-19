@@ -333,8 +333,6 @@ sudo apt-get update && sudo apt-get install --no-install-recommends yarn
 
 bootstrap_echo "Step 9: Setting up Tmuxinator..."
 
-gem install tmuxinator
-
 if [ ! -d "$HOME"/.tmuxinator/ ]; then
   mkdir "$HOME"/.tmuxinator
 fi
