@@ -64,11 +64,11 @@ ASDF_RUBY_VERSION="2.6.2"
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
 DOTFILES_REPO_URL="https://github.com/joshukraine/linux-dotfiles.git"
-DOTFILES_BRANCH="master"
+DOTFILES_BRANCH="march-2019-updates"
 DOTFILES_DIR=$HOME/dotfiles
 
 BOOTSTRAP_REPO_URL="https://github.com/joshukraine/linux-bootstrap.git"
-BOOTSTRAP_BRANCH="master"
+BOOTSTRAP_BRANCH="march-2019-updates"
 BOOTSTRAP_DIR=$HOME/linux-bootstrap
 
 
