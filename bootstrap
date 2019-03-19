@@ -61,6 +61,7 @@ append_to_zshrc 'export PATH="$HOME/bin:$PATH"'
 osname=$(uname)
 
 ASDF_RUBY_VERSION="2.6.2"
+ASDF_NODEJS_VERSION="10.15.3"
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
 DOTFILES_REPO_URL="https://github.com/joshukraine/linux-dotfiles.git"
