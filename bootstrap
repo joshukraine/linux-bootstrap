@@ -27,13 +27,13 @@ bootstrap_echo() {
 
 osname=$(uname)
 DEFAULT_ASDF_VERSION="0.7.1"
-DEFAULT_RUBY_VERSION="2.5.3"
+DEFAULT_RUBY_VERSION="2.6.2"
 DEFAULT_NODEJS_VERSION="8.12.0"
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
 DOTFILES_REPO_URL="git@bitbucket.org:speedy1812/dotfiles.git"
 DEFAULT_DOTFILES_BRANCH="master"
-DOTFILES_DIR=$HOME/.dotfiles
+DOTFILES_DIR=$HOME/dotfiles
 
 BOOTSTRAP_REPO_URL="git@github.com:speedy1812/linux-bootstrap.git"
 DEFAULT_BOOTSTRAP_BRANCH="master"
@@ -173,27 +173,21 @@ sudo aptitude -y upgrade
 
 bootstrap_echo "Step 2: Installing basic tools..."
 
-bootstrap_echo "Installing build-essential..."
-sudo aptitude install -y build-essential
-
-bootstrap_echo "Installing curl ..."
-sudo aptitude install -y curl
-
-bootstrap_echo "Installing python software properties..."
-sudo aptitude install -y python-software-properties
+# https://gorails.com/setup/ubuntu/18.04
+# Recommended deps for Ruby 2.6.1 minus git-core, nodejs,and yarn
+bootstrap_echo "Installing Ruby dependencies ..."
+sudo apt-get install curl zlib1g-dev build-essential libssl-dev
+libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev
+libcurl4-openssl-dev software-properties-common libffi-dev
 
 bootstrap_echo "Installing other useful libraries..."
-sudo aptitude install -y zlib1g-dev libssl-dev libreadline-dev libyaml-dev libsqlite3-dev libxml2-dev libxslt1-dev libcurl4-openssl-dev libffi-dev libcurl4-gnutls-dev libexpat1-dev gettext unzip gcc make
+sudo aptitude install -y gettext unzip gcc make
 
-# https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit#debian--ubuntu
-bootstrap_echo "Installing libraries for Capybara..."
-sudo aptitude install -y qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
-
-# http://sourcedigit.com/21550-git-2-11-released-how-to-install-git-on-ubuntu-16-10/
+# https://git-scm.com/download/linux
 bootstrap_echo "Installing git..."
-sudo add-apt-repository -y ppa:git-core/ppa
-sudo aptitude update
-sudo aptitude install -y git
+sudo add-apt-repository ppa:git-core/ppa
+sudo apt update
+sudo apt install git
 
 bootstrap_echo "Installing sqlite3..."
 sudo aptitude install -y sqlite3
@@ -291,16 +285,16 @@ git clone "$DOTFILES_REPO_URL" -b "$DOTFILES_BRANCH" "$DOTFILES_DIR"
 
 bootstrap_echo "Symlinking dotfiles..."
 
-ln -nfs ~/.dotfiles/gemrc ~/.gemrc
-ln -nfs ~/.dotfiles/gitignore_global ~/.gitignore_global
-ln -nfs ~/.dotfiles/gitconfig ~/.gitconfig
-ln -nfs ~/.dotfiles/tmux.conf ~/.tmux.conf
-ln -nfs ~/.dotfiles/railsrc ~/.railsrc
-ln -nfs ~/.dotfiles/vimrc ~/.vimrc
-ln -nfs ~/.dotfiles/zshrc ~/.zshrc
-ln -nfs ~/.dotfiles/asdfrc ~/.asdfrc
-ln -nfs ~/.dotfiles/tool-versions ~/.tool-versions
-ln -nfs ~/.dotfiles/default-gems ~/.default-gems
+ln -nfs ~/dotfiles/gemrc ~/.gemrc
+ln -nfs ~/dotfiles/gitignore_global ~/.gitignore_global
+ln -nfs ~/dotfiles/gitconfig ~/.gitconfig
+ln -nfs ~/dotfiles/tmux.conf ~/.tmux.conf
+ln -nfs ~/dotfiles/railsrc ~/.railsrc
+ln -nfs ~/dotfiles/vimrc ~/.vimrc
+ln -nfs ~/dotfiles/zshrc ~/.zshrc
+ln -nfs ~/dotfiles/asdfrc ~/.asdfrc
+ln -nfs ~/dotfiles/tool-versions ~/.tool-versions
+ln -nfs ~/dotfiles/default-gems ~/.default-gems
 source ~/.zshrc
 
 ################################################################################
