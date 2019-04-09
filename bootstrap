@@ -111,8 +111,12 @@ fi
 
 printf "\\nWhich version of asdf would you like to install?
 (Leave blank for default: %s)\\n" "$DEFAULT_ASDF_VERSION"
-read -r -p "> " ASDF_NODEJS_VERSION
-export ASDF_NODEJS_VERSION=${ASDF_NODEJS_VERSION:-$DEFAULT_ASDF_VERSION}
+read -r -p "> " ASDF_VERSION
+if [ -n "$ASDF_VERSION" ]; then
+	export ASDF_VERSION
+else
+	export ASDF_VERSION="$DEFAULT_ASDF_VERSION"
+fi
 
 printf "\\nWhich version of Node.js would you like to install?
 Available versions: https://semver.io/node/versions
@@ -129,6 +133,7 @@ export ASDF_RUBY_VERSION=${ASDF_RUBY_VERSION:-$DEFAULT_RUBY_VERSION}
 printf "\\nLooks good. Here's what we've got so far.\\n"
 printf "Bootstrap branch: ==> [%s]\\n" "$BOOTSTRAP_BRANCH"
 printf "Dotfiles branch:  ==> [%s]\\n" "$DOTFILES_BRANCH"
+printf "asdf version:     ==> [%s]\\n" "$ASDF_VERSION"
 printf "Node.js version:  ==> [%s]\\n" "$ASDF_NODEJS_VERSION"
 printf "Ruby version:     ==> [%s]\\n" "$ASDF_RUBY_VERSION"
 
@@ -384,7 +389,7 @@ fi
 }
 
 if [ ! -d "$HOME/.asdf" ]; then
-	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v"$DEFAULT_ASDF_VERSION"
+	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v"$ASDF_VERSION"
 	append_to_zshrc "source $HOME/.asdf/asdf.sh" 1
 fi
 
