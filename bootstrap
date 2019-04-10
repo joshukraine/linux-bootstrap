@@ -264,21 +264,10 @@ bootstrap_echo "Cloning your dotfiles repo to ${DOTFILES_DIR} ..."
 
 git clone "$DOTFILES_REPO_URL" -b "$DOTFILES_BRANCH" "$DOTFILES_DIR"
 
-# shellcheck source=/dev/null
-# source "$DOTFILES_DIR"/install.sh
+source "$DOTFILES_DIR"/install.sh
 
 bootstrap_echo "Symlinking dotfiles..."
 
-ln -nfs ~/dotfiles/gemrc ~/.gemrc
-ln -nfs ~/dotfiles/gitignore_global ~/.gitignore_global
-ln -nfs ~/dotfiles/gitconfig ~/.gitconfig
-ln -nfs ~/dotfiles/tmux.conf ~/.tmux.conf
-ln -nfs ~/dotfiles/railsrc ~/.railsrc
-ln -nfs ~/dotfiles/vimrc ~/.vimrc
-ln -nfs ~/dotfiles/zshrc ~/.zshrc
-ln -nfs ~/dotfiles/asdfrc ~/.asdfrc
-ln -nfs ~/dotfiles/tool-versions ~/.tool-versions
-ln -nfs ~/dotfiles/default-gems ~/.default-gems
 source ~/.zshrc
 
 ################################################################################
