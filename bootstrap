@@ -202,26 +202,17 @@ bootstrap_echo "Installing Vim ..."
 sudo aptitude remove vim-tiny -y
 sudo aptitude install -y vim-gnome
 
+bootstrap_echo "Installing Neovim ..."
+sudo apt-get install neovim
+
 bootstrap_echo "Installing htop..."
 sudo aptitude install -y htop
 
 bootstrap_echo "Installing tree..."
 sudo aptitude install -y tree
 
-if grep -qiE 'precise|saucy|trusty|utopic|vivid' /etc/os-release; then
-  bootstrap_echo "Adding tmux ppa:pi-rho/dev..."
-  sudo add-apt-repository -y ppa:pi-rho/dev
-  sudo aptitude update
-fi
-
 bootstrap_echo "Installing tmux..." # http://stackoverflow.com/a/25952511
-if grep -qiE 'trusty' /etc/os-release; then
-  sudo aptitude install -y tmux=2.0-1~ppa1~t
-elif grep -qiE 'vivid' /etc/os-release; then
-  sudo aptitude install -y tmux=2.0-1~ppa1~v
-else
-  sudo aptitude install -y tmux
-fi
+sudo apt-get install tmux
 
 bootstrap_echo "Installing zsh..."
 sudo aptitude install -y zsh
