@@ -308,30 +308,7 @@ bootstrap_echo "Done!"
 
 
 ################################################################################
-# 7. Install Vundle and Vim plugins
-################################################################################
-
-bootstrap_echo "Step 7: Installing Vundle and Vim plugins..."
-
-if [ -d "$HOME"/.vim/bundle ]; then
-  rm -rf "$HOME"/.vim/bundle
-fi
-
-git clone https://github.com/gmarik/Vundle.vim.git "$HOME/.vim/bundle/Vundle.vim"
-
-# So Vim won't complain about solarized not being found:
-mkdir "$HOME"/.vim/colors
-touch "$HOME"/.vim/colors/solarized.vim
-
-vim +PluginInstall +qall
-
-rm -rf "$HOME"/.vim/colors
-
-bootstrap_echo "Done!"
-
-
-################################################################################
-# 8. Install asdf
+# 7. Install asdf
 ################################################################################
 
 bootstrap_echo "Step 8: Configuring asdf version manager..."
@@ -374,14 +351,11 @@ source "$HOME/.asdf/asdf.sh"
 install_asdf_plugin "ruby" "https://github.com/asdf-vm/asdf-ruby.git"
 install_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
 
-# Install eslint for linting Javascript
-npm install -g eslint
-
 bootstrap_echo "Done!"
 
 
 ################################################################################
-# 9. Install Ruby, Bundler, and Node
+# 8. Install Ruby, Bundler, and Node
 ################################################################################
 
 bootstrap_echo "Step 9: Install Ruby, Bundler, and Node..."
@@ -407,7 +381,7 @@ asdf install nodejs "$DEFAULT_NODEJS_VERSION"
 bootstrap_echo "Done!"
 
 ################################################################################
-# 10. Set up Tmux Plugin Manager (https://github.com/tmux-plugins/tpm)
+# 9. Set up Tmux Plugin Manager (https://github.com/tmux-plugins/tpm)
 ################################################################################
 
 bootstrap_echo "Step 10: Setting up Tmux Plugin Manager..."
