@@ -200,7 +200,7 @@ sudo aptitude install -y exuberant-ctags
 
 bootstrap_echo "Installing Vim ..."
 sudo aptitude remove vim-tiny -y
-sudo aptitude install -y vim-gnome
+sudo aptitude install -y vim-gtk
 
 bootstrap_echo "Installing Neovim ..."
 sudo apt-get install neovim
