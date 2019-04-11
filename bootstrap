@@ -263,7 +263,7 @@ chsh -s "$(which zsh)"
 # 4. Setup dotfiles
 ################################################################################
 
-bootstrap_echo "Step 4: Installing dotfiles..."
+bootstrap_echo "Step 4: Setup dotfiles..."
 if [[ -d $DOTFILES_DIR ]]; then
   bootstrap_echo "Backing up old dotfiles to $HOME/old_dotfiles_backup..."
   rm -rf "$OLD_DOTFILES_BACKUP"

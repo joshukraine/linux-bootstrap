@@ -12,13 +12,10 @@ Supported distros
 
 This script has been successfully tested on the following Linux distros:
 
-* Ubuntu 16.04
+* Ubuntu 18.04
 
 Installation
 ------------
-
-**NOTE: Currently, the installation of Vim is disabled and Vim will need to be [compiled
-from source](https://gist.github.com/joshukraine/b9085aeb3dd762cf1d1e1c356974032f) before installing.**
 
 To install with a one-liner, run this:
 
@@ -42,14 +39,14 @@ When you invoke `bootstrap`, this is what it does in a nutshell:
 * Patch the system and install various software packages.
 * Install various software utilities.
 * Install [Oh-My-Zsh](https://github.com/robbyrussell/oh-my-zsh).
-* Symlink dotfiles to `$HOME`
-* Install several fixed-width fonts.
-* Install [Vundle](https://github.com/VundleVim/Vundle.vim.git) and plugins for Vim.
+* Clone and setup dotfiles
+* Install executable scrips to `$HOME/bin`.
+* Install fixed-width fonts.
 * Install [asdf](https://github.com/asdf-vm/asdf).
-* Install Ruby, Bundler, and Node.
+* Install Ruby, Node, Postgres, and Yarn.
 * Set up Tmux.
 
 License
 -------
 
-Copyright (c) 2017 Nathan Day. [MIT License](https://github.com/speedy1812/linux-bootstrap/blob/master/LICENSE)
+Copyright (c) 2019 Nathan Day. [MIT License](https://github.com/speedy1812/linux-bootstrap/blob/master/LICENSE)
