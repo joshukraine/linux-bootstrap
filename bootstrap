@@ -324,25 +324,6 @@ bootstrap_echo "Done!"
 
 bootstrap_echo "Step 7: Configuring asdf version manager..."
 
-append_to_zshrc() {
-local text="$1" zshrc
-local skip_new_line="${2:-0}"
-
-if [ -w "$HOME/.zshrc.local" ]; then
-	zshrc="$HOME/.zshrc.local"
-else
-	zshrc="$HOME/.zshrc"
-fi
-
-if ! grep -Fqs "$text" "$zshrc"; then
-	if [ "$skip_new_line" -eq 1 ]; then
-		printf "%s\n" "$text" >> "$zshrc"
-	else
-		printf "\n%s\n" "$text" >> "$zshrc"
-	fi
-fi
-}
-
 if [ ! -d "$HOME/.asdf" ]; then
 	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v"$ASDF_VERSION"
 	append_to_zshrc "source $HOME/.asdf/asdf.sh" 1
@@ -369,9 +350,15 @@ bootstrap_echo "Done!"
 # 8. Install Ruby, Bundler, and Node
 ################################################################################
 
-bootstrap_echo "Step 8: Install Ruby, Bundler, and Node..."
+bootstrap_echo "Step 8: Installing Ruby, Bundler, and Node..."
+
 bootstrap_echo "Installing Ruby $DEFAULT_RUBY_VERSION ..."
 asdf install ruby "$DEFAULT_RUBY_VERSION"
+bootstrap_echo "Checking which Ruby & Gem installs we are using at this point..."
+echo "Ruby --> $(command -v ruby)"
+ruby -v
+echo "Gem --> $(command -v gem)"
+gem -v
 gem update --system
 
 gem_install_or_update() {
@@ -387,6 +374,14 @@ gem_install_or_update "bundler"
 bootstrap_echo "Installing Node $DEFAULT_NODEJS_VERSION ..."
 bash "$HOME/.asdf/plugins/nodejs/bin/import-release-team-keyring"
 asdf install nodejs "$DEFAULT_NODEJS_VERSION"
+bootstrap_echo "Checking which Node & NPM installs we are using at this point..."
+echo "Node --> $(command -v node)"
+node -v
+echo "NPM --> $(command -v npm)"
+npm -v
+
+npm install -g gulp-cli
+npm install -g neovim
 
 bootstrap_echo "Done!"
 
