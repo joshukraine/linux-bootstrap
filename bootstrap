@@ -392,12 +392,24 @@ asdf current postgres
 bootstrap_echo "Done!"
 
 ################################################################################
-# 9. Set up Tmux Plugin Manager (https://github.com/tmux-plugins/tpm)
+# 9. Install Yarn
 ################################################################################
 
-bootstrap_echo "Step 9: Setting up Tmux Plugin Manager..."
+bootstrap_echo "Step 9: Installing Yarn..."
+# https://yarnpkg.com/en/docs/install#debian-stable
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update && sudo apt-get install --no-install-recommends yarn
+
+################################################################################
+# 10. Set up Tmux Plugin Manager
+################################################################################
+
+bootstrap_echo "Step 10: Setting up Tmux Plugin Manager..."
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+bootstrap_echo "To install plugins, run the following command in Tumx:"
+bootstrap_echo "prefix + I (capital I, as in Install)"
 
 bootstrap_echo "Done!"
 
