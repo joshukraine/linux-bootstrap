@@ -153,8 +153,8 @@ bootstrap_echo "Step 1: Cleaning out unneeded software & updating the system..."
 
 bootstrap_echo "Cleaning out unneeded software ..."
 
-sudo apt-get purge thunderbird\*
-sudo apt-get remove --purge libreoffice\*
+sudo apt-get -y purge thunderbird\*
+sudo apt-get -y remove --purge libreoffice\*
 
 bootstrap_echo "Updating system packages ..."
 
@@ -194,8 +194,8 @@ sudo apt-get install -y aptitude
 # https://git-scm.com/download/linux
 bootstrap_echo "Installing git..."
 sudo add-apt-repository ppa:git-core/ppa
-sudo apt update
-sudo apt install git
+sudo apt-get update
+sudo apt-get install git
 
 bootstrap_echo "Installing sqlite3..."
 sudo apt-get install -y sqlite3
@@ -278,8 +278,6 @@ git clone "$DOTFILES_REPO_URL" -b "$DOTFILES_BRANCH" "$DOTFILES_DIR"
 bootstrap_echo "Symlinking dotfiles..."
 
 source "$DOTFILES_DIR"/install.sh
-
-source ~/.zshrc
 
 ################################################################################
 # 5. Install ~/bin utilities
