@@ -146,25 +146,20 @@ if [[ ! "$REPLY" =~ ^[Yy]$ ]]; then
 fi
 
 ################################################################################
-# 1. Clean out unneeded software and update the system.
+# 1. Clean out unneeded software and update the system
 ################################################################################
 
-bootstrap_echo "Step 1: Cleaning out unneeded software ..."
+bootstrap_echo "Step 1: Cleaning out unneeded software & updating the system..."
+
+bootstrap_echo "Cleaning out unneeded software ..."
 
 sudo apt-get purge thunderbird\*
 sudo apt-get remove --purge libreoffice\*
 
 bootstrap_echo "Updating system packages ..."
 
-if command -v aptitude >/dev/null; then
-  bootstrap_echo "Using aptitude ..."
-else
-  bootstrap_echo "Installing aptitude ..."
-  sudo apt-get install -y aptitude
-fi
-
-sudo aptitude update
-sudo aptitude -y upgrade
+sudo apt-get update
+sudo apt-get -y upgrade
 
 
 ################################################################################
@@ -181,7 +176,10 @@ libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev
 libcurl4-openssl-dev software-properties-common libffi-dev
 
 bootstrap_echo "Installing other useful libraries..."
-sudo aptitude install -y gettext unzip gcc make
+sudo apt-get install -y gettext unzip gcc make
+
+bootstrap_echo "Installing aptitude ..."
+sudo apt-get install -y aptitude
 
 # https://git-scm.com/download/linux
 bootstrap_echo "Installing git..."
@@ -190,17 +188,17 @@ sudo apt update
 sudo apt install git
 
 bootstrap_echo "Installing sqlite3..."
-sudo aptitude install -y sqlite3
+sudo apt-get install -y sqlite3
 
 bootstrap_echo "Installing Redis..."
-sudo aptitude install -y redis-server
+sudo apt-get install -y redis-server
 
 bootstrap_echo "Installing ctags..."
-sudo aptitude install -y exuberant-ctags
+sudo apt-get install -y exuberant-ctags
 
 bootstrap_echo "Installing Vim ..."
-sudo aptitude remove vim-tiny -y
-sudo aptitude install -y vim-gtk
+sudo apt-get remove vim-tiny -y
+sudo apt-get install -y vim-gtk
 
 bootstrap_echo "Installing Neovim ..."
 sudo add-apt-repository ppa:neovim-ppa/stable
@@ -209,10 +207,10 @@ sudo apt-get install -y python-dev python-pip python3-dev python3-pip
 sudo apt-get install -y neovim
 
 bootstrap_echo "Installing htop..."
-sudo aptitude install -y htop
+sudo apt-get install -y htop
 
 bootstrap_echo "Installing tree..."
-sudo aptitude install -y tree
+sudo apt-get install -y tree
 
 bootstrap_echo "Installing tmux..." # http://stackoverflow.com/a/25952511
 sudo apt-get install tmux
@@ -221,11 +219,11 @@ bootstrap_echo "Installing xclip..."
 sudo apt-get install -y xclip
 
 bootstrap_echo "Installing zsh..."
-sudo aptitude install -y zsh
+sudo apt-get install -y zsh
 
 # The Silver Searcher is require for the ag.vim plugin
 bootstrap_echo "Installing Silver Searcher..."
-sudo aptitude install -y silversearcher-ag
+sudo apt-get install -y silversearcher-ag
 
 bootstrap_echo "Cloning linux-bootstrap repo..."
 git clone "$BOOTSTRAP_REPO_URL" -b "$BOOTSTRAP_BRANCH" "$BOOTSTRAP_DIR"
