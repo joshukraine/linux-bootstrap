@@ -342,15 +342,16 @@ install_asdf_plugin() {
 source "$HOME/.asdf/asdf.sh"
 install_asdf_plugin "ruby" "https://github.com/asdf-vm/asdf-ruby.git"
 install_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
+install_asdf_plugin "postgres" "https://github.com/smashedtoatoms/asdf-postgres.git"
 
 bootstrap_echo "Done!"
 
 
 ################################################################################
-# 8. Install Ruby, Bundler, and Node
+# 8. Install Ruby, Node, and Postgres
 ################################################################################
 
-bootstrap_echo "Step 8: Installing Ruby, Bundler, and Node..."
+bootstrap_echo "Step 8: Installing Ruby, Node, and Postgres..."
 
 bootstrap_echo "Installing Ruby $DEFAULT_RUBY_VERSION ..."
 asdf install ruby "$DEFAULT_RUBY_VERSION"
@@ -382,6 +383,11 @@ npm -v
 
 npm install -g gulp-cli
 npm install -g neovim
+
+bootstrap_echo "Installing Postgres ..."
+asdf install postgres
+bootstrap_echo "Checking which version of Postgres was installed..."
+asdf current postgres
 
 bootstrap_echo "Done!"
 
