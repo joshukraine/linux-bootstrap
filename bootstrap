@@ -168,12 +168,22 @@ sudo apt-get -y upgrade
 
 bootstrap_echo "Step 2: Installing basic tools..."
 
-# https://gorails.com/setup/ubuntu/18.04
 # Recommended deps for Ruby 2.6.1 minus git-core, nodejs,and yarn
+# https://gorails.com/setup/ubuntu/18.04
 bootstrap_echo "Installing Ruby dependencies ..."
-sudo apt-get install curl zlib1g-dev build-essential libssl-dev
-libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev
-libcurl4-openssl-dev software-properties-common libffi-dev
+sudo apt-get install \
+  curl zlib1g-dev build-essential libssl-dev \
+  libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev \
+  libcurl4-openssl-dev software-properties-common libffi-dev \
+
+# Recommended deps for asdf 0.7.1
+# https://asdf-vm.com/#/core-manage-asdf-vm
+bootstrap_echo "Installing asdf dependencies ..."
+sudo apt-get install \
+  automake autoconf libreadline-dev \
+  libncurses-dev libssl-dev libyaml-dev \
+  libxslt-dev libffi-dev libtool unixodbc-dev \
+  unzip curl
 
 bootstrap_echo "Installing other useful libraries..."
 sudo apt-get install -y gettext unzip gcc make
@@ -209,10 +219,13 @@ sudo apt-get install -y neovim
 bootstrap_echo "Installing htop..."
 sudo apt-get install -y htop
 
+bootstrap_echo "Installing ImageMagick..."
+sudo apt-get install -y imagemagick
+
 bootstrap_echo "Installing tree..."
 sudo apt-get install -y tree
 
-bootstrap_echo "Installing tmux..." # http://stackoverflow.com/a/25952511
+bootstrap_echo "Installing tmux..."
 sudo apt-get install tmux
 
 bootstrap_echo "Installing xclip..."
@@ -221,7 +234,7 @@ sudo apt-get install -y xclip
 bootstrap_echo "Installing zsh..."
 sudo apt-get install -y zsh
 
-# The Silver Searcher is require for the ag.vim plugin
+# The Silver Searcher is required for the ag.vim plugin
 bootstrap_echo "Installing Silver Searcher..."
 sudo apt-get install -y silversearcher-ag
 
@@ -262,9 +275,9 @@ bootstrap_echo "Cloning your dotfiles repo to ${DOTFILES_DIR} ..."
 
 git clone "$DOTFILES_REPO_URL" -b "$DOTFILES_BRANCH" "$DOTFILES_DIR"
 
-source "$DOTFILES_DIR"/install.sh
-
 bootstrap_echo "Symlinking dotfiles..."
+
+source "$DOTFILES_DIR"/install.sh
 
 source ~/.zshrc
 
@@ -309,7 +322,7 @@ bootstrap_echo "Done!"
 # 7. Install asdf
 ################################################################################
 
-bootstrap_echo "Step 8: Configuring asdf version manager..."
+bootstrap_echo "Step 7: Configuring asdf version manager..."
 
 append_to_zshrc() {
 local text="$1" zshrc
@@ -356,8 +369,7 @@ bootstrap_echo "Done!"
 # 8. Install Ruby, Bundler, and Node
 ################################################################################
 
-bootstrap_echo "Step 9: Install Ruby, Bundler, and Node..."
-
+bootstrap_echo "Step 8: Install Ruby, Bundler, and Node..."
 bootstrap_echo "Installing Ruby $DEFAULT_RUBY_VERSION ..."
 asdf install ruby "$DEFAULT_RUBY_VERSION"
 gem update --system
@@ -382,7 +394,7 @@ bootstrap_echo "Done!"
 # 9. Set up Tmux Plugin Manager (https://github.com/tmux-plugins/tpm)
 ################################################################################
 
-bootstrap_echo "Step 10: Setting up Tmux Plugin Manager..."
+bootstrap_echo "Step 9: Setting up Tmux Plugin Manager..."
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
