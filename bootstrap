@@ -29,6 +29,7 @@ osname=$(uname)
 DEFAULT_ASDF_VERSION="0.7.1"
 DEFAULT_RUBY_VERSION="2.6.2"
 DEFAULT_NODEJS_VERSION="8.12.0"
+DEFAULT_POSTGRES_VERSION="11.2"
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
 
 DOTFILES_REPO_URL="git@bitbucket.org:speedy1812/dotfiles.git"
@@ -382,7 +383,7 @@ npm install -g gulp-cli
 npm install -g neovim
 
 bootstrap_echo "Installing Postgres ..."
-asdf install postgres
+asdf install postgres "$DEFAULT_POSTGRES_VERSION"
 bootstrap_echo "Checking which version of Postgres was installed..."
 asdf current postgres
 
