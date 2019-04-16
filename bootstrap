@@ -385,7 +385,8 @@ npm install -g neovim
 bootstrap_echo "Installing Postgres ..."
 asdf install postgres "$DEFAULT_POSTGRES_VERSION"
 bootstrap_echo "Checking which version of Postgres was installed..."
-asdf current postgres
+echo "Postgres --> $(command -v postgres)"
+postgres -V
 
 bootstrap_echo "Done!"
 
