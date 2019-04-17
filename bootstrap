@@ -215,6 +215,10 @@ bootstrap_echo "Installing Neovim ..."
 sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt-get update
 sudo apt-get install -y python-dev python-pip python3-dev python3-pip
+# Install updated Python plugins
+# https://neovim.io/doc/user/provider.html#provider-python
+python3 -m pip install --user --upgrade pynvim
+python2 -m pip install --user --upgrade pynvim
 sudo apt-get install -y neovim
 
 bootstrap_echo "Installing htop..."
