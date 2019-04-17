@@ -67,6 +67,16 @@ if [ ! -d $HOME/.ssh ]; then
   exit 1
 fi
 
+bootstrap_echo "SSH keys must be added to Bitbucket and Github for this script
+to be able to clone the dotfiles and the bootstrap script."
+echo
+read -p "Continue? (y/n) " -n 1 -r
+echo
+if [[ ! "$REPLY" =~ ^[Yy]$ ]]; then
+	echo "Exiting..."
+	exit 1
+fi
+
 ################################################################################
 # Authenticate
 ################################################################################
